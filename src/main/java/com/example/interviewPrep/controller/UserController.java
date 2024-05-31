@@ -13,33 +13,33 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/user-profiles")
+@RequestMapping("/users")
 public class UserController {
 
-    private final UserService userProfileService;
+    private final UserService userService;
 
     @Autowired
-    public UserController(UserService userProfileService) {
-        this.userProfileService = userProfileService;
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
-    @GetMapping
+    @GetMapping("/getAll")
     public ResponseEntity<List<User>> getAllUserProfiles() {
-        List<User> userProfiles = userProfileService.getAllUserProfiles();
+        List<User> userProfiles = userService.getAllUserProfiles();
         return new ResponseEntity<>(userProfiles, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<User> getUserProfileById(@PathVariable Long id) {
-        Optional<User> userProfile = userProfileService.getUserProfileById(id);
+        Optional<User> userProfile = userService.getUserProfileById(id);
         return userProfile.map(profile -> new ResponseEntity<>(profile, HttpStatus.OK))
                 .orElseThrow(() -> new ProfileNotFoundException("User profile not found with ID: " + id));
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<User> createUserProfile(@RequestBody User userProfile) {
         try {
-            User createdProfile = userProfileService.createUserProfile(userProfile);
+            User createdProfile = userService.createUserProfile(userProfile);
             return new ResponseEntity<>(createdProfile, HttpStatus.CREATED);
         } catch (ProfileCreationException e) {
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
@@ -49,7 +49,7 @@ public class UserController {
     @PutMapping("/{id}")
     public ResponseEntity<User> updateUserProfile(@PathVariable Long id, @RequestBody User user) {
         try {
-            User updatedProfile = userProfileService.updateUserProfile(id, user);
+            User updatedProfile = userService.updateUserProfile(id, user);
             return new ResponseEntity<>(updatedProfile, HttpStatus.OK);
         } catch (ProfileNotFoundException e) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
@@ -59,7 +59,7 @@ public class UserController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUserProfile(@PathVariable Long id) {
         try {
-            boolean isDeleted = userProfileService.deleteUserProfile(id);
+            boolean isDeleted = userService.deleteUserProfile(id);
             if (isDeleted) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             } else {
