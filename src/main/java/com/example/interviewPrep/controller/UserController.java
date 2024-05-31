@@ -23,7 +23,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/getAll")
+    @GetMapping
     public ResponseEntity<List<User>> getAllUserProfiles() {
         List<User> userProfiles = userService.getAllUserProfiles();
         return new ResponseEntity<>(userProfiles, HttpStatus.OK);
@@ -36,7 +36,7 @@ public class UserController {
                 .orElseThrow(() -> new ProfileNotFoundException("User profile not found with ID: " + id));
     }
 
-    @PostMapping("/create")
+    @PostMapping
     public ResponseEntity<User> createUserProfile(@RequestBody User userProfile) {
         try {
             User createdProfile = userService.createUserProfile(userProfile);
@@ -80,3 +80,4 @@ public class UserController {
         return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
     }
 }
+

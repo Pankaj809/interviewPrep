@@ -28,11 +28,11 @@ public class User {
     @Column(name = "email", nullable = false, unique = true, length = 100)
     private String email;
 
-    @Column(name = "google_id", nullable = false, unique = true, length = 100)
-    private String googleId;
+    @Column(name = "verification_token")
+    private String verificationToken;
 
-    @Column(name = "profile_picture_url")
-    private String profilePictureUrl;
+    @Column(name = "is_verified")
+    private Boolean isVerified;
 
     @CreationTimestamp
     @Column(name = "created_at", updatable = false)
