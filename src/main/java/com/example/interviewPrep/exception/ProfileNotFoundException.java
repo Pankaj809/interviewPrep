@@ -1,8 +1,8 @@
-package com.example.interviewPrep.exception;
-
-public class ProfileNotFoundException extends RuntimeException {
-
-    public ProfileNotFoundException(String message) {
-        super(message);
-    }
-}
+//package com.example.interviewPrep.exception;
+//
+//public class ProfileNotFoundException extends RuntimeException {
+//
+//    public ProfileNotFoundException(String message) {
+//        super(message);
+//    }
+//}
