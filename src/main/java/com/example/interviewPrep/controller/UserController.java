@@ -7,6 +7,9 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+import java.util.Optional;
+
 @RestController
 public class UserController {
 
@@ -32,4 +35,20 @@ public class UserController {
         }
         return null;
     }
+
+    @GetMapping("/user/delete")
+    public void deleteUser(Long id) throws Exception {
+            userService.deleteUser(id);
+    }
+
+    @GetMapping("/user/findById")
+    public Optional<User> findById(Long id) throws Exception {
+        return userService.findUserById(id);
+    }
+
+    @GetMapping("/user/findAll")
+    public List<User> findAll() throws Exception {
+        return userService.findAllUsers();
+    }
+
 }
