@@ -25,12 +25,10 @@ public class UserController {
             String email = principal.getAttribute("email");
             String fullName = principal.getAttribute("name");
             String imageUrl = principal.getAttribute("picture");
-
             User user = new User();
             user.setEmail(email);
             user.setFullName(fullName);
             user.setImageUrl(imageUrl);
-
             return userService.saveOrUpdateUser(user);
         }
         return null;
