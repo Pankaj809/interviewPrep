@@ -24,7 +24,6 @@ public class SecurityConfig {
                                 .defaultSuccessUrl("/user")
                                 .failureHandler((request, response, e) -> {})
                 );
-
         return http.build();
     }
 }
