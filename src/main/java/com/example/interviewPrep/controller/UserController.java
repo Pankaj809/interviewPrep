@@ -1,14 +1,20 @@
 package com.example.interviewPrep.controller;
 
+import com.example.interviewPrep.dto.UserResponse;
 import com.example.interviewPrep.model.User;
 import com.example.interviewPrep.service.UserService;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import java.util.List;
 import java.util.Optional;
+import java.util.Map;
+import java.util.HashMap;
 
 @RestController
 public class UserController {
@@ -20,23 +26,34 @@ public class UserController {
     }
 
     @GetMapping("/user")
-    public User getUser(@AuthenticationPrincipal OAuth2User principal) {
+    public UserResponse getUser(@AuthenticationPrincipal OAuth2User principal) throws ChangeSetPersister.NotFoundException {
+
         if (principal != null) {
             String email = principal.getAttribute("email");
             String fullName = principal.getAttribute("name");
             String imageUrl = principal.getAttribute("picture");
+
             User user = new User();
             user.setEmail(email);
             user.setFullName(fullName);
             user.setImageUrl(imageUrl);
-            return userService.saveOrUpdateUser(user);
+
+            User savedUser = userService.saveOrUpdateUser(user);
+            String token = userService.generateToken(savedUser);
+
+            return UserResponse.builder()
+                    .user(savedUser)
+                    .token(token)
+                    .build();
         }
-        return null;
+
+        throw new ChangeSetPersister.NotFoundException();
     }
+
 
     @GetMapping("/user/delete")
     public void deleteUser(Long id) throws Exception {
-            userService.deleteUser(id);
+        userService.deleteUser(id);
     }
 
     @GetMapping("/user/findById")
@@ -48,5 +65,4 @@ public class UserController {
     public List<User> findAll() throws Exception {
         return userService.findAllUsers();
     }
-
 }
