@@ -32,7 +32,7 @@ public class UserService {
     }
 
     public String generateToken(User user) {
-        return jwtUtil.generateToken(user.getEmail());
+        return jwtUtil.generateToken(user);
     }
 
     public Optional<User> findUserById(Long id) throws Exception {
