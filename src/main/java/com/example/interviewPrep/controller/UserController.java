@@ -1,16 +1,14 @@
 package com.example.interviewPrep.controller;
 
 import com.example.interviewPrep.dto.UserResponse;
+import com.example.interviewPrep.jwt.JwtVerify;
 import com.example.interviewPrep.model.User;
 import com.example.interviewPrep.service.UserService;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.user.OAuth2User;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import java.util.List;
 import java.util.Optional;
 import java.util.Map;
@@ -56,11 +54,11 @@ public class UserController {
         userService.deleteUser(id);
     }
 
-    @GetMapping("/user/findById")
-    public Optional<User> findById(Long id) throws Exception {
+    @GetMapping("/user/{id}")
+    public Optional<User> findById(@PathVariable long id) throws Exception {
         return userService.findUserById(id);
     }
-
+    @JwtVerify
     @GetMapping("/user/findAll")
     public List<User> findAll() throws Exception {
         return userService.findAllUsers();

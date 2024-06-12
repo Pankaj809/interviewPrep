@@ -1,19 +1,14 @@
 package com.example.interviewPrep.jwt;
 
 import com.example.interviewPrep.model.User;
-import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Component;
 
 import java.security.Key;
 import java.util.Base64;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.function.Function;
 
 @Component
 public class JwtUtils {
@@ -35,7 +30,7 @@ public class JwtUtils {
 
 
 
-    public Claims getClaimsFromToken(String token) {
+    public boolean getClaimsFromToken(String token) {
         try {
             var claims = Jwts.parserBuilder()
                     .setSigningKey(SECRET_KEY)
@@ -43,7 +38,7 @@ public class JwtUtils {
                     .parseClaimsJws(token)
                     .getBody();
 
-            return claims;
+            return claims.isEmpty();
         } catch (JwtException e) {
             throw new RuntimeException("Invalid Token");
         }
