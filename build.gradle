@@ -31,6 +31,9 @@ dependencies {
 	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'  // Needed for implementation at runtime
 	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
 	implementation 'io.github.cdimascio:java-dotenv:5.2.2' // Add this line
+	implementation group: 'org.springframework', name: 'spring-web', version: '6.1.9' +
+			''
+
 
 }
 

@@ -1,7 +1,7 @@
 package com.example.interviewPrep.controller;
 
 import com.example.interviewPrep.dto.UserResponse;
-import com.example.interviewPrep.jwt.JwtVerify;
+//import com.example.interviewPrep.jwt.JwtVerify;
 import com.example.interviewPrep.model.User;
 import com.example.interviewPrep.service.UserService;
 import org.springframework.data.crossstore.ChangeSetPersister;
@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Map;
-import java.util.HashMap;
 
 @RestController
 public class UserController {
@@ -25,7 +23,6 @@ public class UserController {
 
     @GetMapping("/user")
     public UserResponse getUser(@AuthenticationPrincipal OAuth2User principal) throws ChangeSetPersister.NotFoundException {
-
         if (principal != null) {
             String email = principal.getAttribute("email");
             String fullName = principal.getAttribute("name");
@@ -38,7 +35,6 @@ public class UserController {
 
             User savedUser = userService.saveOrUpdateUser(user);
             String token = userService.generateToken(savedUser);
-
             return UserResponse.builder()
                     .user(savedUser)
                     .token(token)
@@ -48,19 +44,21 @@ public class UserController {
         throw new ChangeSetPersister.NotFoundException();
     }
 
-
-    @GetMapping("/user/delete")
-    public void deleteUser(Long id) throws Exception {
+//    @JwtVerify
+    @DeleteMapping("/user/delete/{id}")
+    public void deleteUser(@PathVariable Long id) throws Exception {
         userService.deleteUser(id);
     }
 
+//    @JwtVerify
     @GetMapping("/user/{id}")
     public Optional<User> findById(@PathVariable long id) throws Exception {
         return userService.findUserById(id);
     }
-    @JwtVerify
+
+//    @JwtVerify
     @GetMapping("/user/findAll")
-    public List<User> findAll() throws Exception {
+    public List<User> findAll() {
         return userService.findAllUsers();
     }
 }
