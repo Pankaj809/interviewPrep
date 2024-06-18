@@ -32,7 +32,6 @@ public class UserController {
             user.setEmail(email);
             user.setFullName(fullName);
             user.setImageUrl(imageUrl);
-
             User savedUser = userService.saveOrUpdateUser(user);
             String token = userService.generateToken(savedUser);
             return UserResponse.builder()
