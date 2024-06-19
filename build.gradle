@@ -38,6 +38,15 @@ tasks.named('test') {
 	useJUnitPlatform()
 }
 
+bootJar {
+	archiveFileName = 'interviewPrep-0.0.1-SNAPSHOT-plain.jar'
+	manifest {
+		attributes(
+				'Main-Class': 'com.example.interviewPrep.InterviewPrepApplication'
+		)
+	}
+}
+
 jar {
 	manifest {
 		attributes(
@@ -46,12 +55,6 @@ jar {
 	}
 }
 
-bootJar {
-	archiveFileName = 'interviewPrep.jar'
-	manifest {
-		attributes(
-				'Main-Class': 'com.example.interviewPrep.InterviewPrepApplication',
-				'Class-Path': configurations.runtimeClasspath.collect { it.getName() }.join(' ')
-		)
-	}
+springBoot {
+	buildInfo()
 }
