@@ -15,7 +15,6 @@ public class InterviewPrepApplication {
 
 		System.setProperty("google.redirect.uri", Objects.requireNonNull(dotenv.get("GOOGLE_REDIRECT_URI")));
 
-
 		SpringApplication.run(InterviewPrepApplication.class, args);
 	}
 
