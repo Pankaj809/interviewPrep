@@ -39,7 +39,7 @@ tasks.named('test') {
 }
 
 bootJar {
-	archiveFileName = 'interviewPrep-0.0.1-SNAPSHOT-plain.jar'
+	archiveFileName = 'interviewPrep.jar'
 	manifest {
 		attributes(
 				'Main-Class': 'com.example.interviewPrep.InterviewPrepApplication'
