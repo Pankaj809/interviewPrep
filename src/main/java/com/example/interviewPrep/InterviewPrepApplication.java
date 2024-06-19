@@ -11,9 +11,9 @@ public class InterviewPrepApplication {
 
 	public static void main(String[] args) {
 
-		Dotenv dotenv = Dotenv.load();
-
-		System.setProperty("google.redirect.uri", Objects.requireNonNull(dotenv.get("GOOGLE_REDIRECT_URI")));
+//		Dotenv dotenv = Dotenv.load();
+//
+//		System.setProperty("google.redirect.uri", Objects.requireNonNull(dotenv.get("GOOGLE_REDIRECT_URI")));
 
 
 		SpringApplication.run(InterviewPrepApplication.class, args);
