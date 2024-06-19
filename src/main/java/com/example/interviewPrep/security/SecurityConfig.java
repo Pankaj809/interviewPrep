@@ -35,8 +35,8 @@ public class SecurityConfig implements WebMvcConfigurer {
                 )
                 .oauth2Login(oauth2 -> oauth2
                         .successHandler(oAuth2SuccessHandler())
-                )
-                .csrf().disable(); // Disable CSRF protection if not needed (optional, depending on your use case)
+                );
+//                .csrf().disable(); // Disable CSRF protection if not needed (optional, depending on your use case)
 
         return http.build();
     }
