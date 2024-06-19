@@ -38,6 +38,14 @@ tasks.named('test') {
 	useJUnitPlatform()
 }
 
+jar {
+	manifest {
+		attributes(
+				'Main-Class': 'com.example.interviewPrep.InterviewPrepApplication'
+		)
+	}
+}
+
 bootJar {
 	archiveFileName = 'interviewPrep.jar'
 	manifest {
