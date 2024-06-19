@@ -46,12 +46,10 @@ tasks.named('test') {
 
 bootJar {
 	archiveFileName = 'interviewPrep.jar'
-}
-
-jar {
 	manifest {
 		attributes(
-				'Main-Class': 'com.example.interviewPrep.InterviewPrepApplication'
+				'Main-Class': 'com.example.interviewPrep.InterviewPrepApplication',
+				'Class-Path': configurations.runtimeClasspath.collect { it.getName() }.join(' ')
 		)
 	}
 }
