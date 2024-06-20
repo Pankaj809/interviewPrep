@@ -21,7 +21,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/user")
+    @GetMapping("/user/get")
     public UserResponse getUser(@AuthenticationPrincipal OAuth2User principal) throws ChangeSetPersister.NotFoundException {
         if (principal != null) {
             String email = principal.getAttribute("email");
