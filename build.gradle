@@ -42,5 +42,5 @@ tasks.named('test') {
 }
 
 bootJar {
-	archiveFileName = 'interviewPrep.jar'
+	archiveFileName = 'interviewPrep-0.0.1-SNAPSHOT-plain.jar'
 }
