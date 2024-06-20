@@ -1,4 +1,2 @@
 
-
-web: > java -jar -Dserver.port=$PORT  $JAVA_OPTS build/libs/*.jar
-
+web: java -Dserver.port=$PORT -jar build/libs/interviewPrep-0.0.1-SNAPSHOT-plain.jar

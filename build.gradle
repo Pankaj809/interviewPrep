@@ -45,23 +45,18 @@ bootJar {
 	archiveFileName = 'interviewPrep.jar'
 }
 
-//bootJar {
-//	archiveFileName = 'interviewPrep-0.0.1-SNAPSHOT-plain.jar'
-//}
-
-
-
-
-jar { //Don't package test folders and files
-	exclude "test/**"
-	exclude "test/**/**"
+tasks.register('stage') {
+	dependsOn build
 }
 
-build.mustRunAfter clean //First clean then build to avoid cache issues etc
-
-
-bootJar { //Exclude test files when pack boot jar file
-	enabled = true
-	exclude "test/**"
-	exclude "test/**/**"
+jar {
+	enabled = false
+	manifest {
+		attributes('Main-Class': 'com.example.interviewPrep.InterviewPrepApplication')
+	}
 }
+
+
+
+
+
