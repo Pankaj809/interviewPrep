@@ -43,6 +43,6 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         // Redirect or respond with the token and user details
-        response.sendRedirect("/loginSuccess?token=" + token);
+        response.sendRedirect("/user/get");
     }
 }
