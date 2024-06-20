@@ -41,22 +41,20 @@ tasks.named('test') {
 	useJUnitPlatform()
 }
 
-bootJar {
-	archiveFileName = 'interviewPrep.jar'
-}
-
-tasks.register('stage') {
-	dependsOn build
-}
-
-jar {
-	enabled = false
-	manifest {
-		attributes('Main-Class': 'com.example.interviewPrep.InterviewPrepApplication')
+task stage(type: Copy, dependsOn: [clean, build]) {
+	from jar.archivePath
+	into project.rootDir
+	rename {
+		'interviewPrep.jar'
 	}
 }
+stage.mustRunAfter(clean)
 
-
-
-
-
+jar {
+	exclude 'META-INF/*.SF', 'META-INF/*.DSA', 'META-INF/*.RSA', 'META-INF/*.MF'
+	manifest {
+		attributes(
+				'Main-Class': 'com.example.interviewPrep.InterviewPrepApplication'
+		)
+	}
+}
