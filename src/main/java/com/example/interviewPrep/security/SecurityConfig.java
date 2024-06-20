@@ -31,7 +31,7 @@ public class SecurityConfig implements WebMvcConfigurer {
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
                                 .requestMatchers("/user/pre-questions").authenticated()// Provide full access to this endpoint
-                                .anyRequest().authenticated() // Secure all other endpoints
+                                .anyRequest().permitAll() // Secure all other endpoints
                 )
                 .oauth2Login(oauth2 -> oauth2
                         .successHandler(oAuth2SuccessHandler())
