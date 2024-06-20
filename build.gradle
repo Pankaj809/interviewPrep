@@ -41,14 +41,6 @@ tasks.named('test') {
 	useJUnitPlatform()
 }
 
-task stage(type: Copy, dependsOn: [clean, build]) {
-	from jar.archivePath
-	into project.rootDir
-	rename {
-		'interviewPrep.jar'
-	}
-}
-stage.mustRunAfter(clean)
 
 jar {
 	exclude 'META-INF/*.SF', 'META-INF/*.DSA', 'META-INF/*.RSA', 'META-INF/*.MF'
