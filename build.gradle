@@ -42,5 +42,26 @@ tasks.named('test') {
 }
 
 bootJar {
-	archiveFileName = 'interviewPrep-0.0.1-SNAPSHOT-plain.jar'
+	archiveFileName = 'interviewPrep.jar'
+}
+
+//bootJar {
+//	archiveFileName = 'interviewPrep-0.0.1-SNAPSHOT-plain.jar'
+//}
+
+
+
+
+jar { //Don't package test folders and files
+	exclude "test/**"
+	exclude "test/**/**"
+}
+
+build.mustRunAfter clean //First clean then build to avoid cache issues etc
+
+
+bootJar { //Exclude test files when pack boot jar file
+	enabled = true
+	exclude "test/**"
+	exclude "test/**/**"
 }
