@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping
 public class PreQuestionSetController {
 
     private final PreQuestionSetService preQuestionSetService;
@@ -19,7 +19,7 @@ public class PreQuestionSetController {
         this.preQuestionSetService = preQuestionSetService;
     }
 
-    @PostMapping("/pre-questions")
+    @PostMapping("user/preQuestions")
     public ResponseEntity<PreQuestionSet> createPreQuestionSet(@RequestBody PreQuestionSet preQuestionSet, HttpServletRequest request) {
         String token = request.getHeader("Authorization").substring(7); // Remove "Bearer " prefix
         PreQuestionSet createdPreQuestionSet = preQuestionSetService.createPreQuestionSet(preQuestionSet, token);
