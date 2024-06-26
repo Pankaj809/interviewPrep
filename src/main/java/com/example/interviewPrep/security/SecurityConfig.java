@@ -30,8 +30,8 @@ public class SecurityConfig implements WebMvcConfigurer {
         http
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
-//                                .requestMatchers("/user/pre-questions").access()// Provide full access to this endpoint
-                                .anyRequest().permitAll() // Secure all other endpoints
+                                .requestMatchers("/user/preQuestions").permitAll()// Provide full access to this endpoint
+                                .anyRequest().authenticated() // Secure all other endpoints
                 )
                 .oauth2Login(oauth2 -> oauth2
                         .successHandler(oAuth2SuccessHandler())
@@ -49,6 +49,6 @@ public class SecurityConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(oAuth2Interceptor).addPathPatterns("/**");
+//        registry.addInterceptor(oAuth2Interceptor).addPathPatterns("/**");
     }
 }
